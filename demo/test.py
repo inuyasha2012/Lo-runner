@@ -33,7 +33,7 @@ def runone(p_path, in_path, out_path):
         'fd_in': fin.fileno(),
         'fd_out': ftemp.fileno(),
         'timelimit': 1000,  # in MS
-        'memorylimit': 1,  # in KB
+        'memorylimit': 6000,  # in KB
     }
 
     rst = lorun.run(runcfg)
