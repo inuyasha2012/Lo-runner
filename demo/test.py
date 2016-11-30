@@ -67,7 +67,7 @@ def judge(src_path, td_path, td_total):
             print('testdata:%d incompleted' % i)
             os.remove('./m')
             exit(-1)
-    os.remove('./m')
+    # os.remove('./m')
 
 
 if __name__ == '__main__':
