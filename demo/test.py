@@ -54,8 +54,8 @@ def runone(p_path, in_path, out_path):
 
 
 def judge(src_path, td_path, td_total):
-    if not compileSrc(src_path):
-        return
+    # if not compileSrc(src_path):
+    #     return
     for i in range(td_total):
         in_path = os.path.join(td_path, '%d.in' % i)
         out_path = os.path.join(td_path, '%d.out' % i)
