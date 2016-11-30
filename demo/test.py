@@ -32,7 +32,7 @@ def runone(p_path, in_path, out_path):
         'args': ['python', 'main.pyc'],
         'fd_in': fin.fileno(),
         'fd_out': ftemp.fileno(),
-        'timelimit': 1000,  # in MS
+        'timelimit': 10,  # in MS
         'memorylimit': 10000,  # in KB
     }
 
