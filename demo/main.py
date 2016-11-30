@@ -1,5 +1,4 @@
 from ab import AB
-import time
 
 def main():
     a, b = raw_input().split()
@@ -7,3 +6,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+1
