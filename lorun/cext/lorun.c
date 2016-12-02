@@ -24,7 +24,7 @@
 
 int initRun(struct Runobj *runobj, PyObject *args)
 {
-    PyObject *config, *args_obj, *trace_obj, *time_obj, *memory_obj;
+    PyObject *config, *args_obj, *trace_obj, *time_obj, *memory_obj, *java_obj;
     PyObject *calls_obj, *runner_obj, *fd_obj;
     
     if (!PyArg_ParseTuple(args, "O", &config))
@@ -53,7 +53,17 @@ int initRun(struct Runobj *runobj, PyObject *args)
     if((memory_obj = PyDict_GetItemString(config, "memorylimit")) == NULL)
         RAISE1("must supply memorylimit");
     runobj->memory_limit = PyLong_AsLong(memory_obj);
-    
+
+    //Define java support
+    runobj->java = 0;
+    if((java_obj = PyDict_GetItemString(config, "java")) != NULL)
+        if(java_obj == Py_True)
+        {
+            runobj->java = 1;
+            if((fd_obj = PyDict_GetItemString(config, "fd_err")) == NULL)
+                RAISE1("must supply fd_err while using java");
+        }
+        
     if((runner_obj = PyDict_GetItemString(config, "runner")) == NULL)
         runobj->runner = -1;
     else

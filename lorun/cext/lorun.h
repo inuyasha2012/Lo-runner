@@ -54,6 +54,8 @@ struct Runobj {
     int time_limit, memory_limit;
     int runner;
     int trace;
+    //Java suooprt
+    int java;
 };
 
 #define RAISE(msg) PyErr_SetString(PyExc_Exception,msg);
