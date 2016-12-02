@@ -29,7 +29,7 @@ def runone(p_path, in_path, out_path):
     ftemp = open('temp.out', 'w')
 
     runcfg = {
-        'args': ['./m'],
+        'args': ['python', 'main.pyc'],
         'fd_in': fin.fileno(),
         'fd_out': ftemp.fileno(),
         'timelimit': 1000,  # in MS
@@ -54,8 +54,8 @@ def runone(p_path, in_path, out_path):
 
 
 def judge(src_path, td_path, td_total):
-    if not compileSrc(src_path):
-        return
+    # if not compileSrc(src_path):
+    #     return
     for i in range(td_total):
         in_path = os.path.join(td_path, '%d.in' % i)
         out_path = os.path.join(td_path, '%d.out' % i)
