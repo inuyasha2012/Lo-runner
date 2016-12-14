@@ -49,7 +49,6 @@ def runone(p_path, in_path, out_path):
         os.remove('temp.out')
         if crst != 0:
             return {'result': crst}
-
     return rst
 
 
@@ -67,7 +66,7 @@ def judge(src_path, td_path, td_total):
             print('testdata:%d incompleted' % i)
             os.remove('./m')
             exit(-1)
-    os.remove('./m')
+    # os.remove('./m')
 
 
 if __name__ == '__main__':
