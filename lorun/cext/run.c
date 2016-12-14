@@ -81,7 +81,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid) {
                 {
                     case SIGCHLD:
                     case SIGALRM:
-                        rst->judge_result = RE;
+                        rst->judge_result = MLE;
                     case SIGKILL:
                     case SIGXCPU:
                         rst->judge_result = TLE;
@@ -108,7 +108,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid) {
                 {
                     case SIGCHLD:
                     case SIGALRM:
-                        rst->judge_result = RE;
+                        rst->judge_result = MLE;
                     case SIGKILL:
                     case SIGXCPU:
                         rst->judge_result = TLE;
