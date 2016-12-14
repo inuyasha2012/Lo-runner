@@ -201,7 +201,7 @@ int runit(struct Runobj *runobj, struct Result *rst) {
         if (runobj->trace)
             if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) == -1)
                 RAISE_EXIT("TRACEME failure")
-        //alarm(10);
+        alarm(5);
         execvp(runobj->args[0], (char * const *) runobj->args);
 
         RAISE_EXIT("execvp failure")
