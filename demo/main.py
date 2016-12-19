@@ -1,5 +1,6 @@
 from ab import AB
 
+
 def main():
     a, b = raw_input().split()
     print AB().sum(int(a), int(b))
