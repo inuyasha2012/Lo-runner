@@ -1,5 +1,6 @@
 from ab import AB
 
+c = 1
 
 def main():
     a, b = raw_input().split()

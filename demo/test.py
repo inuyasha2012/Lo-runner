@@ -61,7 +61,7 @@ def get_process_children(pid):
     return [int(p) for p in stdout.split()]
 
 
-def compileSrc(src_path):
+def compile_src(src_path):
     if run('gcc %s -o m' % src_path, shell=True, timeout=3) != 0:
         print('compile failure!')
         return False
@@ -97,7 +97,7 @@ def runone(p_path, in_path, out_path):
 
 
 def judge(src_path, td_path, td_total):
-    if not compileSrc(src_path):
+    if not compile_src(src_path):
         return
     for i in range(td_total):
         in_path = os.path.join(td_path, '%d.in' % i)
