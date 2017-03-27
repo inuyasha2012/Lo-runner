@@ -31,13 +31,13 @@
 const char *last_run_err;
 #define RAISE_RUN(err) {last_run_err = err;return -1;}
 
-int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMemory) {
+int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid) {
     long memory;
     int status, incall = 0;
     struct rusage ru;
     struct user_regs_struct regs;
     
-    rst->memory_used = get_proc_status(pid, "VmRSS:") - usedMemory;
+    rst->memory_used = get_proc_status(pid, "VmRSS:");
 
     rst->judge_result = AC;
 
@@ -50,7 +50,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
         if (runobj->java)
             memory = get_page_fault_mem(ru, pid);
         else
-            memory = get_proc_status(pid, "VmPeak:") - usedMemory;
+            memory = get_proc_status(pid, "VmPeak:");
         if (memory > rst->memory_used)
             rst->memory_used = memory;
 
@@ -160,7 +160,6 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
 int runit(struct Runobj *runobj, struct Result *rst) {
     pid_t pid;
     int fd_err[2];
-    long memory;
 
     if (pipe2(fd_err, O_NONBLOCK))
         RAISE1("run :pipe2(fd_err) failure");
@@ -221,8 +220,8 @@ int runit(struct Runobj *runobj, struct Result *rst) {
 
         //A hack to warning ...
         r = nice(19);
-        memory = get_proc_status(pid, "VmPeak:");
-        r = traceLoop(runobj, rst, pid, memory);
+
+        r = traceLoop(runobj, rst, pid);
 
         if (r)
             RAISE1(last_run_err);
