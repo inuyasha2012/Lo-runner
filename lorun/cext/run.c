@@ -37,7 +37,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
     struct rusage ru;
     struct user_regs_struct regs;
     
-    rst->memory_used = get_proc_status(pid, "VmRSS:") - usedMemory;
+    rst->memory_used = get_proc_status(pid, "VmRSS:") - 60000;
 
     rst->judge_result = AC;
 
@@ -50,7 +50,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
         if (runobj->java)
             memory = get_page_fault_mem(ru, pid);
         else
-            memory = get_proc_status(pid, "VmPeak:") - usedMemory;
+            memory = get_proc_status(pid, "VmPeak:") - 60000;
         if (memory > rst->memory_used)
             rst->memory_used = memory;
 
