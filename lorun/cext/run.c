@@ -37,7 +37,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
     struct rusage ru;
     struct user_regs_struct regs;
     
-    rst->memory_used = get_proc_status(pid, "VmRSS:") - 60000;
+    rst->memory_used = get_proc_status(pid, "VmRSS:") - usedMemory;
 
     rst->judge_result = AC;
 
@@ -50,7 +50,7 @@ int traceLoop(struct Runobj *runobj, struct Result *rst, pid_t pid, long usedMem
         if (runobj->java)
             memory = get_page_fault_mem(ru, pid);
         else
-            memory = get_proc_status(pid, "VmPeak:") - 60000;
+            memory = get_proc_status(pid, "VmPeak:") - usedMemory;
         if (memory > rst->memory_used)
             rst->memory_used = memory;
 
@@ -203,7 +203,6 @@ int runit(struct Runobj *runobj, struct Result *rst) {
             if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) == -1)
                 RAISE_EXIT("TRACEME failure")
         alarm(5);
-        memory = get_proc_status(pid, "VmPeak:");
         execvp(runobj->args[0], (char * const *) runobj->args);
 
         RAISE_EXIT("execvp failure")
@@ -222,7 +221,7 @@ int runit(struct Runobj *runobj, struct Result *rst) {
 
         //A hack to warning ...
         r = nice(19);
-
+        memory = get_proc_status(pid, "VmPeak:");
         r = traceLoop(runobj, rst, pid, memory);
 
         if (r)
