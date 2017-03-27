@@ -119,4 +119,4 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print('Usage:%s srcfile testdata_pth testdata_total')
         exit(-1)
-    judge(sys.argv[1], sys.argv[2], int(sys.argv[3]))
+    judge('a+b.c', 'testdata', 3)
